@@ -64,5 +64,18 @@ namespace Lab1 {
 
             return s;
         }
+
+        public int CheckRatio() {
+            int id = -1;
+            float ratio = -1;
+            for (int i = 0; i < items.Count; i++) {
+                if (items[i].vwRatio > ratio) {
+                    id = i;
+                    ratio = items[i].vwRatio;
+                }
+            }
+
+            return id;
+        }
     }
 }

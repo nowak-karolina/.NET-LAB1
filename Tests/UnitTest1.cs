@@ -6,7 +6,7 @@ namespace Tests {
     [TestClass]
     public class UnitTest1 {
         [TestMethod]
-        public void TestMethod1() { //Sprawdzenie, czy jeœli co najmniej jeden przedmiot spe³nia ograniczenia, to zwrócono co najmniej 1 element
+        public void ReturnAtLeastOneElement() { //Sprawdzenie, czy jeœli co najmniej jeden przedmiot spe³nia ograniczenia, to zwrócono co najmniej 1 element
             Problem problem = new Problem(10, 1);
             Result result = problem.Solve(50);
             Debug.WriteLine(result);
@@ -14,7 +14,7 @@ namespace Tests {
         }
 
         [TestMethod]
-        public void TestMethod2() { //Sprawdzenie, czy jeœli ¿aden przedmiot nie spe³nia ograniczeñ, to zwrócono puste rozwi¹zanie.
+        public void ReturnEmptyResult() { //Sprawdzenie, czy jeœli ¿aden przedmiot nie spe³nia ograniczeñ, to zwrócono puste rozwi¹zanie.
             Problem problem = new Problem(3, 1);
             problem.ForceItem(2, 4, 0);
             problem.ForceItem(5, 8, 1);
@@ -29,7 +29,7 @@ namespace Tests {
         }
 
         [TestMethod]
-        public void TestMethod3() { //Sprawdzenie, czy kolejnoœæ przedmiotów ma wp³ywa na znalezione rozwi¹zanie.
+        public void TestSorting() { //Sprawdzenie, czy kolejnoœæ przedmiotów ma wp³ywa na znalezione rozwi¹zanie.
             Problem problem = new Problem(3, 1);
             problem.ForceItem(2, 1, 0);
             problem.ForceItem(5, 8, 1);
@@ -49,7 +49,7 @@ namespace Tests {
         }
 
         [TestMethod]
-        public void TestMethod4() { //Sprawdzenie poprawnoœci wyniku dla konkretnej instancji.
+        public void TestSpecificProblem() { //Sprawdzenie poprawnoœci wyniku dla konkretnej instancji.
             Problem problem = new Problem(3, 1);
             problem.ForceItem(2, 1, 0);
             problem.ForceItem(5, 8, 1);
@@ -65,7 +65,7 @@ namespace Tests {
         }
 
         [TestMethod]
-        public void TestMethod5() { //testowanie przypadku, gdy wszystkie przedmioty sie zmieszcza
+        public void EveryItemInBackpack() { //testowanie przypadku, gdy wszystkie przedmioty sie zmieszcza
             Problem problem = new Problem(3, 1);
             problem.ForceItem(2, 1, 0);
             problem.ForceItem(5, 8, 1);
@@ -77,11 +77,10 @@ namespace Tests {
             Assert.AreEqual(result.sumWeight, 12);
             Assert.AreEqual(result.sumValue, 8);
             Assert.AreEqual(result.id.Count, 3);
-
         }
 
         [TestMethod]
-        public void TestMethod6() { //testowanie przypadku, gdy capacity = 0
+        public void CapacityZero() { //testowanie przypadku, gdy capacity = 0
             Problem problem = new Problem(3, 1);
             problem.ForceItem(2, 4, 0);
             problem.ForceItem(5, 8, 1);
@@ -96,19 +95,15 @@ namespace Tests {
         }
 
         [TestMethod]
-        public void TestMethod7() { // Testowanie przypadku, gdy tylko jeden przedmiot jest dostêpny:
-            Problem problem = new Problem(1, 1);
-            problem.ForceItem(5, 3, 0);
+        public void FirstElementWithBiggestRatio() { // Testowanie czy pierwszy element ma najwieksze v/w ratio
+            Problem problem = new Problem(10, 1);
+            Result result = problem.Solve(40);
 
-            Result result = problem.Solve(6); 
-
-            Assert.AreEqual(5, result.sumValue);
-            Assert.AreEqual(3, result.sumWeight);
-            Assert.AreEqual(1, result.id.Count);
+            Assert.AreEqual(problem.CheckRatio(), 0);
         }
 
         [TestMethod]
-        public void TestMethod8() { // przedmioty maja 0 wartoœæ
+        public void ItemsWithValueZero() { // przedmioty maja 0 wartoœæ
             Problem problem = new Problem(3, 1);
             problem.ForceItem(0, 5, 0);
             problem.ForceItem(0, 7, 1);

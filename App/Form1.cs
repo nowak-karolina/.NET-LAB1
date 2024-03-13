@@ -25,7 +25,7 @@ namespace App {
                 textBox_results.Text = result.ToString();
 
             } else {
-                textBox_results.Text = "naucz sie pisac cyfry";
+                textBox_results.Text = "Invalid input";
                 textBox_instance.Text = "";
             }
         }
